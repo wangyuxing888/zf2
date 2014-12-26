@@ -1,0 +1,54 @@
+<!-- 判断分页数量决定是否显示分页导航-->
+<?php if ($this->pageCount): ?>
+    <div>
+        <ul class="pagination">
+            <!-- 判断是否有上一页-->
+            <?php if (isset($this->previous)): ?>
+                <li>
+                    <!-- 上一页链接-->
+                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->previous; ?>">
+                        <<
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        <<
+                    </a>
+                </li>
+            <?php endif; ?>
+
+            <!-- 循环首页链接页面-->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li>
+                        <!-- 生成各页的导航链接-->
+                        <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $page; ?>">
+                            <?php echo $page; ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="active">
+                        <a href="#"><?php echo $page; ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <!-- 判断是否有下一页-->
+            <?php if (isset($this->next)): ?>
+                <li>
+                    <!-- 生成下一页的链接-->
+                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->next; ?>">
+                        >>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        >>
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+<?php endif; ?>
